@@ -16,12 +16,28 @@ previewButton.addEventListener('click', function () {
 
 card_array = document.getElementsByClassName('form-group');
 
+localStorage.clear()
 const saveButton = document.getElementById('submitButton');
 saveButton.addEventListener('click', function (event) {
     event.preventDefault();
 
-    const card_to = card_array.elements['to'].value;
-    console.log(card_to);
+    let existingCards = JSON.parse(localStorage.getItem('cards')) || [];
+
+    let newCard = {
+        to: document.getElementById('to').value,
+        from: document.getElementById('from').value,
+        title: document.getElementById('title').value,
+        subtitle: document.getElementById('subtitle').value,
+        message: document.getElementById('message').value
+    };
+
+    existingCards.push(newCard);
+
+    localStorage.setItem('cards', JSON.stringify(existingCards));
+    console.log(existingCards);
+
+    // const card_to = card_array.elements['to'].value;
+    // console.log(card_to);
     
 });
 
